@@ -76,6 +76,42 @@ description: "Проектировать, создавать, проверять
 - Для Hysteria2 открывать именно UDP, проверять сертификат/SNI и не путать UDP listener с TCP на том же номере порта.
 - Не включать Hysteria2 как единственный вариант, если целевая сеть полностью блокирует или стабильно режет UDP; держать TCP-based fallback.
 
+## Обязательный аудит детекта
+
+Перед выдачей финального решения обязательно использовать репозиторий:
+
+- `nidox-vpn-detection-defense-skill`
+
+Проверять:
+
+- GeoIP
+- ASN
+- hosting
+- IP reputation
+- DNS
+- маршрутизацию
+- MTU
+- Android признаки VPN
+- iOS признаки VPN
+- ложноположительные срабатывания
+- ограничения методики
+
+Использовать также:
+
+- `references/required-skills.md`
+- `references/final-report-template.md`
+- `skill-entrypoint.md`
+
+## Mandatory VPN Detection Audit
+
+Before any final recommendation, deployment guide, troubleshooting procedure, architecture review, routing analysis or VPN assessment related to VPN, Proxy, VLESS, Reality, Xray, sing-box, Cloudflare, CDN, Podkop or OpenWrt, the assistant MUST invoke:
+
+nidox-vpn-detection-defense-skill
+
+The final answer MUST include:
+
+Проверка на признаки детекта
+
 ## Критерии завершения
 
 - Xray принимает config без ошибки;

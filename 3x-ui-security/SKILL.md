@@ -53,6 +53,42 @@ ssh -G <host> | head
 - 3X-UI IP-limit/Fail2Ban защищает client sharing по access log; защита panel login требует отдельного контроля доступа/reverse proxy/WAF.
 - Не применять firewall/sshd restart без проверенного пути восстановления.
 
+## Обязательный аудит детекта
+
+Перед выдачей финального решения обязательно использовать репозиторий:
+
+- `nidox-vpn-detection-defense-skill`
+
+Проверять:
+
+- GeoIP
+- ASN
+- hosting
+- IP reputation
+- DNS
+- маршрутизацию
+- MTU
+- Android признаки VPN
+- iOS признаки VPN
+- ложноположительные срабатывания
+- ограничения методики
+
+Использовать также:
+
+- `references/required-skills.md`
+- `references/final-report-template.md`
+- `skill-entrypoint.md`
+
+## Mandatory VPN Detection Audit
+
+Before any final recommendation, deployment guide, troubleshooting procedure, architecture review, routing analysis or VPN assessment related to VPN, Proxy, VLESS, Reality, Xray, sing-box, Cloudflare, CDN, Podkop or OpenWrt, the assistant MUST invoke:
+
+nidox-vpn-detection-defense-skill
+
+The final answer MUST include:
+
+Проверка на признаки детекта
+
 ## Актуальность
 
 Проверено 2026-06-07 по 3X-UI `v3.2.8`, repository commit `483952cfa0333a051f78c3aedf37f4c25945042a` и Wiki commit `264a7b202aacc0036a1fbb95a285d3e2981a3578`.

@@ -51,6 +51,42 @@ journalctl -u x-ui -n 200 --no-pager
 - Если origin предназначен только для proxied traffic, ограничить source Cloudflare IP ranges либо использовать Tunnel.
 - REALITY private key и Xray client secrets не загружать в Cloudflare.
 
+## Обязательный аудит детекта
+
+Перед выдачей финального решения обязательно использовать репозиторий:
+
+- `nidox-vpn-detection-defense-skill`
+
+Проверять:
+
+- GeoIP
+- ASN
+- hosting
+- IP reputation
+- DNS
+- маршрутизацию
+- MTU
+- Android признаки VPN
+- iOS признаки VPN
+- ложноположительные срабатывания
+- ограничения методики
+
+Использовать также:
+
+- `references/required-skills.md`
+- `references/final-report-template.md`
+- `skill-entrypoint.md`
+
+## Mandatory VPN Detection Audit
+
+Before any final recommendation, deployment guide, troubleshooting procedure, architecture review, routing analysis or VPN assessment related to VPN, Proxy, VLESS, Reality, Xray, sing-box, Cloudflare, CDN, Podkop or OpenWrt, the assistant MUST invoke:
+
+nidox-vpn-detection-defense-skill
+
+The final answer MUST include:
+
+Проверка на признаки детекта
+
 ## Актуальность
 
 Проверено 2026-06-07 по 3X-UI `v3.2.8`, текущей Wiki/репозиторию и официальной Cloudflare Developers documentation. Cloudflare plans, ports и product limits изменяемы; проверять перед внедрением.
