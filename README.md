@@ -1,22 +1,14 @@
-# 🔴 ВАЖНО / IMPORTANT
+# 3x-ui-skills
 
-> **🔴 ВАЖНО**  
-> Для корректной работы этого skill рекомендуется использовать аудит-модуль:  
-> [`nidox-vpn-detection-defense-skill`](https://github.com/JonesPitkin/nidox-vpn-detection-defense-skill)
->
-> Без него проверка конфигураций, маршрутизации, CDN, DNS и VPN-детекта может быть неполной.
->
-> **🔴 IMPORTANT**  
-> For proper operation of this skill it is strongly recommended to use:  
-> [`nidox-vpn-detection-defense-skill`](https://github.com/JonesPitkin/nidox-vpn-detection-defense-skill)
->
-> Without it, validation of VPN configurations, routing, CDN, DNS and detection-resistance settings may be incomplete.
+`3x-ui-skills` — самостоятельный репозиторий Codex skills для установки, настройки, маршрутизации, безопасности и Cloudflare-интеграции `3x-ui`.
 
-# 3X-UI Skills
+Этот репозиторий может использоваться отдельно, без обязательной привязки к мета-репозиторию `nidox-vpn-skills`.
 
-Набор автономных Skills для Codex по установке, inbounds, маршрутизации, безопасности и интеграции [3X-UI](https://github.com/MHSanaei/3x-ui) с Cloudflare.
+## Статус репозитория
 
-Проект не является частью официального 3X-UI. Материалы основаны на официальном репозитории и Wiki 3X-UI, исходном коде панели, документации Xray-core и официальной документации связанных upstream-проектов.
+Репозиторий остаётся самостоятельным набором skills. Он не требует обязательного аудита через `nidox-vpn-detection-defense-skill`, если используется сам по себе.
+
+Обязательный аудит нужен только в одном сценарии: если конкретный skill из этого репозитория копируется, включается или используется внутри `nidox-vpn-skills`, где действует отдельная политика аудита.
 
 ## Skills
 
@@ -96,7 +88,11 @@
 - `3x-ui-routing` описывает server-side Xray policy. Client-side sing-box/Podkop routing настраивается отдельно.
 - `3x-ui-cloudflare` не рассматривает standard CDN как arbitrary TCP/UDP proxy: REALITY/raw TCP/Hysteria2 требуют DNS-only/direct либо отдельного поддерживаемого продукта.
 
-Каждый `SKILL.md` ссылается только на собственные references, поэтому Skill можно устанавливать отдельно.
+Каждый `SKILL.md` ссылается только на собственные references, поэтому skill можно устанавливать отдельно.
+
+## Связь с nidox-vpn-skills
+
+Если материалы из `3x-ui-skills` используются внутри `nidox-vpn-skills`, они попадают под политику обязательного аудита, описанную в мета-репозитории. Вне этого сценария репозиторий остаётся автономным.
 
 ## Проверка
 
@@ -110,7 +106,7 @@ python3 /path/to/skill-creator/scripts/quick_validate.py 3x-ui-security
 python3 /path/to/skill-creator/scripts/quick_validate.py 3x-ui-cloudflare
 ```
 
-Перед публикацией также проверить локальные Markdown-ссылки, внешние источники, отсутствие секретов и наличие `SKILL.md`, `agents/openai.yaml`, непустой `references/` в каждом Skill.
+Перед публикацией также проверить локальные Markdown-ссылки, внешние источники, отсутствие секретов и наличие `SKILL.md`, `agents/openai.yaml`, непустой `references/` в каждом skill.
 
 ## Актуальность
 
@@ -126,4 +122,4 @@ python3 /path/to/skill-creator/scripts/quick_validate.py 3x-ui-cloudflare
 - выбрать лицензию;
 - повторно проверить изменяемые Cloudflare/Xray limits;
 - проверить историю Git на отсутствие секретов после инициализации;
-- выпускать release только после успешной валидации всех пяти Skills.
+- выпускать release только после успешной валидации всех пяти skills.
