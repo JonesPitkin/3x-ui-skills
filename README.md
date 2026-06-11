@@ -1,125 +1,91 @@
 # 3x-ui-skills
 
-`3x-ui-skills` — самостоятельный репозиторий Codex skills для установки, настройки, маршрутизации, безопасности и Cloudflare-интеграции `3x-ui`.
+Comprehensive AI Skill Repository for `3x-ui`.
 
-Этот репозиторий может использоваться отдельно, без обязательной привязки к мета-репозиторию `nidox-vpn-skills`.
+Official-source-oriented skill collection for `3x-ui` installation, VPS operations, inbound design, routing, security hardening, and Cloudflare edge publishing.
 
-## Статус репозитория
+## Skill Tree
 
-Репозиторий остаётся самостоятельным набором skills. Он не требует обязательного аудита через `nidox-vpn-detection-defense-skill`, если используется сам по себе.
+- [`3x-ui`](3x-ui/SKILL.md)
+- [`3x-ui-vps`](3x-ui-vps/SKILL.md)
+- [`3x-ui-install`](3x-ui-install/SKILL.md)
+- [`3x-ui-inbounds`](3x-ui-inbounds/SKILL.md)
+- [`3x-ui-routing`](3x-ui-routing/SKILL.md)
+- [`3x-ui-security`](3x-ui-security/SKILL.md)
+- [`3x-ui-cloudflare`](3x-ui-cloudflare/SKILL.md)
 
-Обязательный аудит нужен только в одном сценарии: если конкретный skill из этого репозитория копируется, включается или используется внутри `nidox-vpn-skills`, где действует отдельная политика аудита.
+## Dependency Map
 
-## Skills
+- `3x-ui` is the entrypoint skill for repository-level triage and routing.
+- `3x-ui-vps` covers host bootstrap, loopback-only panel exposure, nginx, Docker Compose, and maintenance scripts.
+- `3x-ui-install` handles package, image, database, backup, migration, and rollback workflows.
+- `3x-ui-inbounds` owns protocol and transport design.
+- `3x-ui-routing` owns Xray-side policy, split tunneling, DNS strategy, and balancers.
+- `3x-ui-security` owns panel hardening, TLS, firewall, SSH, and backup protection.
+- `3x-ui-cloudflare` owns DNS, CDN, TLS mode, Tunnel, and proxied endpoint compatibility.
 
-| Skill | Назначение |
-|---|---|
-| [`3x-ui-install`](3x-ui-install/SKILL.md) | Ubuntu/Debian, VPS/LXC, Docker/systemd, обновление, миграция, backup и диагностика |
-| [`3x-ui-inbounds`](3x-ui-inbounds/SKILL.md) | Inbounds, transports, REALITY/Vision/Hysteria2 и совместимость клиентов |
-| [`3x-ui-routing`](3x-ui-routing/SKILL.md) | Xray routing/DNS, geosite/geoip, direct/proxy/block, split tunneling и balancers |
-| [`3x-ui-security`](3x-ui-security/SKILL.md) | Panel hardening, credentials/2FA, TLS, firewall, Fail2Ban, SSH и защита backups |
-| [`3x-ui-cloudflare`](3x-ui-cloudflare/SKILL.md) | Cloudflare DNS/Proxy/CDN, TLS modes, WS/gRPC, Origin Rules, certificates и Tunnel |
+## Quick Start
 
-## Структура
+1. Start with [`3x-ui/SKILL.md`](3x-ui/SKILL.md) to classify the operator task.
+2. Jump into the domain skill that owns the change.
+3. Use the linked `references/` files for runbooks, edge cases, and validation commands.
+4. If the material is embedded into `nidox-vpn-skills`, apply the audit policy from the meta-repository.
+
+## Repository Structure
 
 ```text
 3x-ui-skills/
 ├── README.md
+├── LICENSE
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── SKILL_INDEX.md
+├── VERSION_MATRIX.md
+├── MIGRATION_GUIDE.md
+├── GITHUB_REPOSITORY.md
+├── RELEASE_v1.0.0.md
+├── 3x-ui/
+├── 3x-ui-vps/
 ├── 3x-ui-install/
-│   ├── SKILL.md
-│   ├── agents/openai.yaml
-│   └── references/
 ├── 3x-ui-inbounds/
-│   ├── SKILL.md
-│   ├── agents/openai.yaml
-│   └── references/
 ├── 3x-ui-routing/
-│   ├── SKILL.md
-│   ├── agents/openai.yaml
-│   └── references/
 ├── 3x-ui-security/
-│   ├── SKILL.md
-│   ├── agents/openai.yaml
-│   └── references/
 └── 3x-ui-cloudflare/
-    ├── SKILL.md
-    ├── agents/openai.yaml
-    └── references/
 ```
 
-## Карта знаний
+## Supported Scope
 
-### `3x-ui-install`
+- Ubuntu and Debian hosts
+- VPS and loopback-only panel publishing
+- Docker Compose and native install flows
+- Xray inbounds and transports inside `3x-ui`
+- Cloudflare-backed publication patterns for supported HTTP(S) transports
+- Security hardening and maintenance operations
 
-`install.md`, `update.md`, `backup.md`, `security.md`, `troubleshooting.md`.
+## Official Sources
 
-### `3x-ui-inbounds`
+- `3x-ui` official repository and wiki
+- official `3x-ui` release artifacts and bundled scripts
+- official Cloudflare Developers documentation for DNS, Proxy, SSL/TLS, and Tunnel
 
-- Protocols: VLESS, VMess, Trojan, Shadowsocks, Hysteria2.
-- Other inbounds: WireGuard, HTTP/Mixed, Tunnel, TUN.
-- Security/transports: REALITY, Vision, TCP, mKCP, WS, gRPC, HTTPUpgrade, XHTTP/SplitHTTP.
-- Выбор и совместимость: `comparison.md`, `clients.md`, `troubleshooting.md`.
+See [`3x-ui/references/official-links.md`](3x-ui/references/official-links.md).
 
-### `3x-ui-routing`
+## Version Policy
 
-- `routing.md`, `rules.md` — модель Xray, `domainStrategy`, порядок и поля rules.
-- `dns.md` — Xray DNS, fallback/cache и граница с DNS Podkop.
-- `geosite.md`, `geoip.md` — встроенные и дополнительные `.dat`.
-- `direct-proxy-block.md` — server-side split tunneling.
-- `balancer.md`, `troubleshooting.md` — стратегии и диагностика.
+This repository is publish-ready, but upstream `3x-ui`, Xray-core, and Cloudflare product behavior can change quickly. Validate release notes, current wiki pages, and transport compatibility before production mutations.
 
-### `3x-ui-security`
+See [`VERSION_MATRIX.md`](VERSION_MATRIX.md) and [`MIGRATION_GUIDE.md`](MIGRATION_GUIDE.md).
 
-- `panel-security.md`, `credentials.md`, `tls.md`.
-- `firewall.md`, `fail2ban.md`, `ssh-hardening.md`.
-- `backups-security.md`, `troubleshooting.md`.
+## License
 
-### `3x-ui-cloudflare`
+Released under the MIT License. See [`LICENSE`](LICENSE).
 
-- Архитектура/DNS/CDN: `overview.md`, `dns.md`, `proxy-cdn.md`.
-- TLS/origin: `tls-modes.md`, `certificates.md`, `origin-rules.md`.
-- Transports/access: `websockets.md`, `grpc.md`, `tunnel.md`.
-- Ошибки 522/525/526: `troubleshooting.md`.
+## Contribution Guide
 
-## Границы ответственности
+Contributions should preserve official-source attribution, avoid storing secrets, and keep each skill internally consistent.
 
-- `3x-ui-install` отвечает за жизненный цикл deployment; углубленный hardening находится в `3x-ui-security`.
-- `3x-ui-inbounds` отвечает за protocol/transport; Cloudflare-specific edge/origin настройки находятся в `3x-ui-cloudflare`.
-- `3x-ui-routing` описывает server-side Xray policy. Client-side sing-box/Podkop routing настраивается отдельно.
-- `3x-ui-cloudflare` не рассматривает standard CDN как arbitrary TCP/UDP proxy: REALITY/raw TCP/Hysteria2 требуют DNS-only/direct либо отдельного поддерживаемого продукта.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-Каждый `SKILL.md` ссылается только на собственные references, поэтому skill можно устанавливать отдельно.
+## Changelog
 
-## Связь с nidox-vpn-skills
-
-Если материалы из `3x-ui-skills` используются внутри `nidox-vpn-skills`, они попадают под политику обязательного аудита, описанную в мета-репозитории. Вне этого сценария репозиторий остаётся автономным.
-
-## Проверка
-
-Запускать официальный валидатор `skill-creator` для каждого каталога:
-
-```sh
-python3 /path/to/skill-creator/scripts/quick_validate.py 3x-ui-install
-python3 /path/to/skill-creator/scripts/quick_validate.py 3x-ui-inbounds
-python3 /path/to/skill-creator/scripts/quick_validate.py 3x-ui-routing
-python3 /path/to/skill-creator/scripts/quick_validate.py 3x-ui-security
-python3 /path/to/skill-creator/scripts/quick_validate.py 3x-ui-cloudflare
-```
-
-Перед публикацией также проверить локальные Markdown-ссылки, внешние источники, отсутствие секретов и наличие `SKILL.md`, `agents/openai.yaml`, непустой `references/` в каждом skill.
-
-## Актуальность
-
-Последний аудит выполнен 7 июня 2026 года:
-
-- 3X-UI release `v3.2.8` от 5 июня 2026 года;
-- repository commit `483952cfa0333a051f78c3aedf37f4c25945042a` от 6 июня 2026 года;
-- Wiki commit `264a7b202aacc0036a1fbb95a285d3e2981a3578` от 3 июня 2026 года;
-- bundled Xray-core commit `94ffd50060f1`.
-
-## Перед первой публикацией
-
-- выбрать лицензию;
-- повторно проверить изменяемые Cloudflare/Xray limits;
-- проверить историю Git на отсутствие секретов после инициализации;
-- выпускать release только после успешной валидации всех пяти skills.
+Repository-level release notes are tracked in [`CHANGELOG.md`](CHANGELOG.md).
